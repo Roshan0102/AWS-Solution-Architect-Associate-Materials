@@ -1,0 +1,14 @@
+First need to buy the domain(Eg: www.example.com)
+Then create a private key using the OpenSSL in local
+creating/request for CSR to the same OpenSSL by providing the path to the private key
+OpenSSL will ask the domain, provide it, then the CSR file will get generated
+upload this CSR file in the godaddy, then godaddy will provide you the signed certificate like certificate body and certificate chain via email/download
+Lastly import the certificate body, certificate chain and private key in the ACM
+
+
+That CSR contains:
+
+	Your public key
+	Your domain name (CN/SANs)
+	Metadata
+	A signature generated using your private key

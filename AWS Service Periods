@@ -1,0 +1,8 @@
+SQS -4 to 14 days
+Kinesis Data Streams - upto 365 days
+Dynamo DB Streams - 24 hours retention
+Dynamo DB Contionous Automatic Backup -  last 35 days
+Aurora DB - 16 Read Replica
+Neptune DB - 15 Read Replica
+KeySpaces DB Backup retention - 35 days
+

@@ -1,0 +1,286 @@
+Gateway VPC Endpoints - support s3 and DynamoDB only
+
+RDS Custom only works with Oracle & Microsoft SQL Server.
+
+Cloudwatch logs subscription send logs only to Opensearch, Kinesis data streams and Lambda ✅
+
+Amazon S3 event notifications can be sent to the following destinations: Amazon Simple Notification Service (Amazon SNS) topics, Amazon Simple Queue Service (Amazon SQS) queues, AWS Lambda functions, Amazon EventBridge
+
+S3 Intellingent tiering requires size of the file to be above 128kb for auto-tiering, otherwise auto-tiering wont work.
+
+Kinesis data streams dont have built-in integration with redshift but kinesis data firehouse have built-in integration with redshift. The kinesis data firehose is fully managed and serverless also kinesis data streams is fully managed serverless service becuase we can manually manage shards in it and also auto scaling shards option is also available. Note that kinesis data streams doesn't deliver data to destionations rather it needs some other services like kinesis data firehouse , amazon flink or lambda to read the data from the kinesis data streams and store it in the required destinations. Note that Kinesis data fire house cant send the data to DynamoDB
+
+Redundancy in AWS means duplicating critical components and data across different physical locations (like Availability Zones or Regions) to eliminate single points of failure, ensuring high availability and fault tolerance
+
+CloudFront function can modify only viewer requests and responses but Lambda@edge can modify all four viewer requests and responses as well as origin requests and responses.CloudFront supports Geo Restrictions.
+
+RDS Support Storage autoscaling and perform when it is less than 10%, or when low space lasts for 5 mins and 6 hours passed since last modification. It is for all Engines.
+
+Using Cost explorer we can create and download reports.
+
+Amazon Lightsail is A simplified VPS service with bundled pricing designed for small applications and developers who want minimal AWS complexity.
+
+There is auto scaling method called Application auto scaling which is mainly used for service-level scaling for example ECS,EKS, Dyanamo DB etc...
+
+S3: When using the AWS CLI or AWS SDKs: The maximum expiration time for a presigned URL is 7 days from the time of creation. When using the Amazon S3 console: The maximum expiration time for a presigned URL is 12 hours.
+
+S3 Transfer accleration is useful to optimize the uploading/downloading data into/from s3 from far away locations over the public internet by using aws edge locations and it will extra cost.
+
+The Maximum SQL data size limit is 256 KB, for more than that reference the data by storing it in S3 ✅
+
+In KInesis data stream also we can mention a partition key to send same data to the same shards.
+
+API Gateway Usage Plans allow you to control and monetize access to your APIs. They specify who can access your deployed API stages and methods, and how much and how fast they can access them.
+
+Compare to RDS Multi-AZ , Dynamo DB is best for high scalabilty and availability
+
+Transite gateway wont connect with on-premises directly, it needs direct connect or VPN feature/method to connect.
+
+Auto Scaling lifecycle hooks pause instances in a wait state during launch or termination, allowing you to perform custom actions before the instance transitions to the next state. They provide a specified amount of time (one hour by default) to complete tasks like software installation, configuration validation, or data backup before the instance becomes operational or is terminated.
+
+Using our software license (BYOL) in the normal intances in not possible, we need dedicated hosts from AWS to use software licenses.
+
+All Fsx Storage and EFS supports POSIX-compliant Interface except FSx for Windows File Server
+
+In ECS Fargate launch type, we need mention the VCPU's we need. but we wont select any instance names.
+
+Kinesis data streams default data retention period is 24 hours.
+
+RDS have a latest deployment feature called RDS Multi-AZ Cluster deployment, where this contains one primary instance for read & write and 2 read replicas each in different AZ. This gives failover recovery within 35 seconds and this feature is only supported by RDS Mysql and RDS PostgreSQL
+
+RDS MYSQL Snapshots cannot be imported directly into Aurora MySQL. But we import a database dump from S3 into Aurora. 
+
+Binlog replication (binary log replication) is a database replication method where all data changes made on a primary database are written to a binary log and then replayed on one or more replicas. This method is used by RDS but not by Aurora.
+
+rsync is a command line tool, used to transfer the data from on-prem to aws using direct connect like aws datasync. the main advantage of this rsync is, it will transfer only the modified data when we re-run or re-transfer.
+
+AWS Transfer family supports SFTP,FTPS, FTP, and mainly AS2 (Application Statement 2) protocol for file transfer.
+
+AWS AppFlow is used to exchange data between SaaS application and AWS services like S3, RedShift.
+
+A VPC link is a resource in Amazon API Gateway that allows you to connect API routes to private resources inside a VPC. ✅
+
+Amazon CloudFront is best for static content, but it can also serve dynamic content by using an ALB (or EC2) as the origin. It can have multiple origins.
+
+RDS Proxy support for Aurora DB too. RDS Proxy does not support for Aurora Serverless v1, RDS Custom for SQL Server, RDS Oracle. ✅
+
+EBS Volumes are not encrypted by default unless enabled by default at the account level.
+
+IAM database authentication works with MySQL and PostgreSQL, MariaDB on both RDS & Aurora. 
+
+Amazon Aurora have a native fuction feature to invoke a lambda function only. ✅
+
+NoSQL DB are Schemaless which means don’t predefine columns and records can have different attributes.
+
+We can place/have different instance types like t2.micro,t3.micro in a single Auto Scaling group by enabling Mixed Instance policy in ASG Configuration.
+
+Aurora Read Replica Supports Auto Scaling. Aurora Maximum Storage space is 256 TiB. Global Aurora will have 16 Read Replica per secondary region. Aurora supports sagemaker and comprehend services in-built.
+
+AWSGlue is best for transformming or converting .csv or some other files to Apache Parquet format.
+
+Amazon kinesis data streams can deliver the data to various destinations include Amazon Kinesis Data Firehose, Amazon Managed Service for Apache Flink, AWS Lambda and to Custom Applications Using the Kinesis Client Library (KCL) to build your own consumers. Amazon Kinesis Data Streams guarantees ordering of records within a single shard. However, unlike Amazon SQS FIFO, Kinesis provides at-least-once delivery and does not have built-in exactly-once processing guarantees. 
+
+If you are using cloudfront and you want only the premium users to access some restricted files then use signed URLs and signed cookies.
+
+If we are registering a domain name in Route 53 to host a static web content in an s3 bucket, then the domain name and the S3 bucket name should be same. ( For example: www.examplebucket.com ). 
+
+Application load balancer also supports gRPC protocol (bi-directional streaming). gRPC is mainly used for microservices communication. ✅
+
+It is possible to configure the consumers of SQS to poll the queue from a particular SQS first and then from the another SQS next. For example from premium members SQS first and then from normal member SQS next.
+
+You cannot directly integrate AWS Network Firewall with an Application Load Balancer (ALB). AWS Network Firewall is primarily designed for traffic inspection at the Virtual Private Cloud (VPC) ingress/egress boundaries, or at the subnet level, rather than individual application-layer services like an ALB
+
+In an RDS Multi-AZ set up, if the primary DB instance fails then the CNAME is switched from the primary to standby. ✅
+
+It is possible to create endpoint policies for both interface endpoints and gateway endpoints.
+
+In NACL * rule is evaluated atlast
+
+When a Lambda function runs inside a VPC, AWS creates ENIs. If the account hits the ENI quota, Lambda fails with EC2ThrottledException.
+
+AWS Systems manager Parameter store allows/has hierarchical storage to store sensitive data.
+
+VPC peering is not supported in a Direct Connect connection. Traffic coming from on-prem via Direct Connect cannot pass through one VPC and then go to another VPC using VPC peering.
+
+We can perform client side encryption using AWS KMS Keys.
+
+In Cloudformation, Dependson follows the order of creation but creation policy checks the creation and running process of a resource and updates the cloudformation. These are the resource we can apply creation policy while creating a stack AWS::AutoScaling::AutoScalingGroup, AWS::EC2::Instance, and AWS::CloudFormation::WaitCondition
+
+IAM Group is usually provided with an IAM Policy and not an IAM Role.
+
+the allowed block size in VPC is between a /16 netmask (65,536 IP addresses) and /28 netmask
+
+Elastic Fabric Adapter (EFA) on each Amazon EC2 instance is used to accelerate High Performance Computing (HPC).
+
+You can use a KMS key to encrypt and decrypt up to 4 KB (4096 bytes) of data. And if we use KMS key, then only we access audit logs, not for SSE or SSE-C keys. To encrypt or decrypt large files use Envelope Encryption method. ✅
+
+In Dynamo DB provisioned mode also, we can enable auto scaling rather then switching to on-demand mode.
+
+Io1 EBS Volume, IOPS calculation is multiply the volume size with 50. For example: volume size 10 GiB, then 10 x 50 = 500 IOPS. For io2 standard, we need to multiply with 500 and for io2 block express multiply with 1000.
+
+The EBS Volume encryption will get done in the instance itself, so the data move from the instance and move out from the volume are always encrypted.
+
+homogeneoushomogeneous migration means migrating from oracle to oracle , but heterogeneous migrations means migrating from oracle to postgresql.
+
+To check the AWS Service quota limit use Service Quotas console or AWS Trusted Advisor
+
+The default message retention period is 4 days in SQS. ✅
+
+example.com - This is an example of  zone apex record in Route53
+
+The maximum tunnel for a VPN connection is two. A single VPN tunnel still has a maximum throughput of 1.25 Gbps.
+
+VPC Peering and Transit Gateway can be used for VPCs in different AWS accounts and across different AWS Regions.
+
+AWS File gateway used NFS or SMB protocol and Volume gateway useS iSCSI.
+
+Route53, ALB, Global accelerator supports weighted routing policy.
+
+EFA wont work as EFA if you attach it with windows instance, it works as ENA only. So EFA is not useful with windows instance.
+
+Amazon FSx for Lustre is incorrect because this service doesn't support Windows-based applications as well as Windows servers.
+
+It is not possible to set the ASG as origin of cloudfront but we can LOAD BALANCER as origin. And we can set 2 origins for a Cloudfront for failovers.
+
+In order to use the Cross-Region Replication feature in S3, you need to first enable versioning on the bucket.
+
+Redis does not supports multithreaded performance by default, it is single threaded.  Redis handles nod failure detection on the server side through automated protocols, while Memcached usually depends on the client-side application to notice and react to a dead node. Redis Auth need passwords to enter.
+
+Only S3 Standard and S3 Intelligent-tiering doesn't have minimum storage duration.
+
+S3 event notifications do not support SNS FIFO topics and SQS FIFO.
+
+Amazon API Gateway has a built-in caching feature for REST APIs and it is possible to use Amazon CloudFront with Amazon API Gateway.
+
+AWS FSx for NetApp ONTAP supports SMB,NFS and ISCSI protocols.
+
+AWS Lambda by default encrypt the env variables but the IAM users who are all have access to lambda function can able to see the env varaibles in plain text, so better to use AWS KMS to encrypt the env variables by assigning it to the lambda function.
+
+For using new API gateway endpoint in the place of old API gateway endpoint, we can use canary release deployment strategy.
+
+Memory Utilization,Disk Swap utilization, Disk Space utilization, Page file utilization, Log collection metrics needs CW Agent and Disk Read activity metric doesn't need CWAgent.
+
+Using AWS SWF(Simple workflow service) we can connect onpremises as well as ec2 instance and other services in the workflow. And in SQS also we can connect with on-premises as well as ec2 instances and other services.
+
+It is possible to integrate IAM Identity center to integrate with Company active directory.
+
+If you launch DynamoDB using CLI, the auto scaling will not be enabled automatically.
+
+We can buy provisioned retrieval capacity in S3, to retreive the objects faster.
+
+AWS COst Explorer have Cost Explorer API to retreive service usage cost programitacaly in other application.
+
+Application Load Balancer supports multiple TLS certificates on a single HTTPS listener using SNI. 
+
+It is not possible to create the hibernation for an EC2 instance after creation.
+
+A newly created subnet in a VPC, linked to the main route table of the VPC.
+
+Per Region vCPU's based on-demand instance launch limit is configured by AWS. 
+
+A Replication Agent in on-premises can replicate Virtual machine from on-prem to aws servers using AWS MGN (AWS Application Migration service)
+
+AWS ElastiCache and AmazonMemoryDB is a in-memory data store 
+
+RDS enhacned monitoring metrics include:  RDS Child processes, OS Processes, etc..
+
+Kinesis data streams ensures no duplicates. 
+
+Babelfish for Aurora PostgreSQL is a capability that allows Amazon Aurora PostgreSQL-Compatible to understand Microsoft SQL Server's proprietary SQL dialect (T-SQL) and communication protocol (TDS). ✅
+
+Cloudtrail encrypt the logs by default.
+
+ACID- Compliant OLTP database is Amazon Aurora.
+
+AWS Parallel Cluster doesn't gives/provides higher bandwidth or high packet per second and lower inter-instance latencies. 
+
+AWS Config provides a built-in acm certificate expiration check rule and also ACM itself will generate health events to notify expiring certificates.
+
+CloudFormation AWSTemplateFormatVersion is 2010-09-09 & IAM Policy Version is 2012-10-17
+
+io1 and io2 multi attach volume can be attache with 16 EC2 instances.
+
+Memory optimized - R,X,u,Z & Storage optimized - I,D,H 
+
+Reserved instances can be used for RDS,Redshift,ElastiCache, Opensearch and DynamoDB.
+
+Multi-Attach won't work in root volumes, which means you can't attach the root volume to another instance parallelly even if it is io1 or io2. ✅
+
+NLB has one static IP per AZ, which mean if we use NLB in multi-AZ, then it will have 2 static IP ✅
+
+An instance cannot be hibernated more than 60 days. Hibernate does not support for Saving plan instances.
+
+AWS Network Load Balancers (NLB) and Gateway Load Balancer (GLB) support HTTP and HTTPS health checks for target groups, in addition to TCP
+
+SSH available for RDS Custom and even SSM too, the key pair will get stored in AWS Secret manager after when you create the RDS Custom database 
+
+Route53 high TTL is 24 hours. And Alias record doesn't support TTL. Alias record is always of type A/AAAA. Alias record doesn't support EC2 DNS name.
+
+S3 Bucket name must not start with xn-- and must not ends with -s3alias.
+
+Using AWS Console, it is possible to upload 160GB of a single file and 5GB single file using CLI/SDK/API. 
+
+For Multi-Part Upload, it supports only CLI/SDK/API and no size limits.
+
+You cannot use the S3 console to upload objects with SSE-C or update existing SSE-C encrypted objects
+
+S3 Glacier Vault lock policy makes even the root user not able to delete the object in that bucket, till the retention period over.
+
+Snowball can't directly import data to S3 Glacier.
+
+Fsx for NETAPP ONTAP supports ISCSI protocol.
+
+Using S3 File gateway does not support to direct insert or upload data in S3 glacier.
+
+AWS DataSync does not support EBS
+
+SQS FIFO Queue names must end with the ".fifo" suffix. SQS per message size limit is 1024KB.
+
+AWS App Runner is used to deploy Web Application and API's.
+
+In Lambda, 429 Indicates throttling error.
+
+Cloudfront Functions supports only Javascript and Lambda@edge supports only Node.js and Python.
+
+DynamoDB has Standard and Standard-IA Table class.DynamoDB max size of an item is 400kb. In DynamoDB RCU & WCU are decoupled/independent. DynamoDB table supports storing user sessions.
+
+Amazon Neptune have streams feature.
+
+Redshift will automatically copy snapshot of a cluster to another region.
+
+AWS Managed Flink cannot read from Kinesis Data Firehouse.
+
+Kinesis max message size limit is 1 MB and Amazon managed Kafka max message size limit is 10 MB. MSK Consumers are Flink, AWS Glue, Lambda and EC2,EKS,ECS Applications.
+
+AWS Transcribe automatically removes the PII without Macie.
+
+Cloudwatch logs can send data to Amazon S3, Kinesis Data Streams, Data Firehouse, AWS Lambda and Opensearch.
+
+CloudTrail Insights detects unsual activity in the account
+
+Eventbridge have archieve and replay feature.
+
+We cannot implement WAF for NLB, because it is at Layer 4, and the WAF works in Layer 7. 
+
+It is possible to create a Aurora Mysql/postgresql Read Replica from RDS Mysql/RDS Postgresql. 
+
+Kinesis Data Firehouse cant send data to Dynamo DB 
+
+ASG LifeCycle Hooks used to run custom scripts when instance gets launched and also before getting terminated.
+
+Use Workload Discovery to generate achitectural diagrams of the existing aws infra.
+
+A VPC link is a resource in Amazon API Gateway that allows you to connect API routes to private resources inside a VPC.
+
+S3 Pre-signed URLs are used not only for temporary view/download access, it is also for PUT/GET/DELETE/POST operations.
+
+EC2 instance store can provide 60 TB or more, depending on the instance type.
+
+AWS Global Accelerator does not provide caching features.
+
+Aurora still requires database maintenance and does not scale read/write capacity as instantly as DynamoDB on-demand, violating the requirement for minimal maintenance and rapid scaling. 
+
+AWS Glue JDBC connections are used to connect AWS Glue ETL jobs to various relational databases for extracting, transforming, and loading data. 
+
+binlog replication uses the MySQL binary log (binlog) to replicate data changes from a source database to one or more replicas.
+
